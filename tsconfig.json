@@ -20,6 +20,6 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src", "./react-app-env.d.ts", "react-csv-reader.d.ts"
   ]
 }
