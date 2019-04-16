@@ -2,23 +2,31 @@ import React, { Component } from "react";
 import { Chart } from "react-google-charts";
 import "./App.css";
 import CSVReader from "react-csv-reader";
+import { initData } from "./mapData";
 
-class App extends Component {
-  state = {
-    mapData: [["Land", "Sleutel"]],
-    allData: [[]]
-  };
+type State = {
+  mapData: string[][];
+  allData: string[][];
+};
+
+class App extends Component<{}, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      mapData: [["Land", "Sleutel"]],
+      allData: initData
+    };
+  }
 
   handleCsv = (json: any) => {
-    // console.log(json);
     this.setState({ allData: json });
   };
 
   setKey = (index: any) => {
     const mapData: any = [];
 
-    this.state.allData.map((row, indexx) => {
-      if (indexx > 0) {
+    this.state.allData.map((row, allIndex) => {
+      if (allIndex > 0) {
         mapData.push([row[0], parseInt(row[index])]);
       }
     });
@@ -28,7 +36,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.mapData);
+    console.log(JSON.stringify(this.state.allData));
     return (
       <div className="App">
         <CSVReader label="select csv" onFileLoaded={this.handleCsv} />
@@ -59,10 +67,8 @@ class App extends Component {
           rootProps={{ "data-testid": "1" }}
           options={{
             colorAxis: {
-              colors: ["#00853f", "yellow", "purple", "black", "#e31b23"]
+              colors: ["#00AEED", "#0183B7", "#7CC04E"]
             },
-            // backgroundColor: "#81d4fa",
-            // datalessRegionColor: "#f8bbd0",
             defaultColor: "#f5f5f5"
           }}
         />
