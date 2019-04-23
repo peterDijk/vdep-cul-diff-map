@@ -27,16 +27,18 @@ class App extends Component<{}, State> {
 
     this.state.allData.map((row, allIndex) => {
       if (allIndex > 0) {
-        mapData.push([row[0], parseInt(row[index])]);
+        if (parseInt(row[index])) {
+          mapData.push([row[0], parseInt(row[index])]);
+        }
       }
     });
-    mapData[0][0] = "Land";
+    mapData[0][0] = "Country";
     mapData[0][1] = this.state.allData[0][index];
     this.setState({ mapData });
   };
 
   render() {
-    console.log(JSON.stringify(this.state.allData));
+    console.log(this.state.mapData);
     return (
       <div className="App">
         <CSVReader label="select csv" onFileLoaded={this.handleCsv} />
