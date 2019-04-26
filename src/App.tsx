@@ -23,7 +23,7 @@ class App extends Component<{}, State> {
   };
 
   setKey = (index: any) => {
-    const mapData: any = [];
+    const mapData: any = [["Country", this.state.allData[0][index]]];
 
     this.state.allData.map((row, allIndex) => {
       if (allIndex > 0) {
@@ -32,13 +32,11 @@ class App extends Component<{}, State> {
         }
       }
     });
-    mapData[0][0] = "Country";
-    mapData[0][1] = this.state.allData[0][index];
     this.setState({ mapData });
   };
 
   render() {
-    console.log(this.state.mapData);
+    console.log(JSON.stringify(this.state.allData));
     return (
       <div className="App">
         <CSVReader label="select csv" onFileLoaded={this.handleCsv} />
@@ -65,7 +63,7 @@ class App extends Component<{}, State> {
           data={this.state.mapData}
           // Note: you will need to get a mapsApiKey for your project.
           // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-          // mapsApiKey="YOUR_KEY_HERE"
+          mapsApiKey="AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY"
           rootProps={{ "data-testid": "1" }}
           options={{
             colorAxis: {
